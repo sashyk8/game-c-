@@ -356,8 +356,20 @@ const char* letters[][7] = {
   "0",
 };
 
-internal void
-draw_text(const char *text, float x, float y, float size, u32 color) {
+/**
+ * @brief Рисует текст на экране с заданным цветом и размером.
+ * 
+ * Функция рисует строку текста, используя логические координаты и размер символов. Каждый символ преобразуется в пиксели и рисуется на экране.
+ * 
+ * @param text Указатель на строку, которую необходимо нарисовать.
+ * @param x Координата X начала строки в логических единицах.
+ * @param y Координата Y начала строки в логических единицах.
+ * @param size Размер каждого символа в логических единицах.
+ * @param color Цвет символов. Тип u32 (обычно это 32-битное целое число, представляющее цвет в формате ARGB или RGBA).
+ * 
+ * @return void Функция не возвращает значения.
+ */
+internal void draw_text(const char *text, float x, float y, float size, u32 color) {
   float half_size = size * .5f;
   float original_y = y;
 
@@ -388,8 +400,20 @@ draw_text(const char *text, float x, float y, float size, u32 color) {
   }
 }
 
-internal void
-draw_number(int number, float x, float y, float size, u32 color) {
+/**
+ * @brief Рисует число на экране с заданным цветом и размером.
+ * 
+ * Функция рисует целое число, используя логические координаты и размер символов. Каждая цифра преобразуется в пиксели и рисуется на экране.
+ * 
+ * @param number Число, которое необходимо нарисовать.
+ * @param x Координата X начала числа в логических единицах.
+ * @param y Координата Y начала числа в логических единицах.
+ * @param size Размер каждой цифры в логических единицах.
+ * @param color Цвет цифр. Тип u32 (обычно это 32-битное целое число, представляющее цвет в формате ARGB или RGBA).
+ * 
+ * @return void Функция не возвращает значения.
+ */
+internal void draw_number(int number, float x, float y, float size, u32 color) {
   float half_size = size * .5f;
 
   bool drew_number = false;
@@ -482,4 +506,3 @@ draw_number(int number, float x, float y, float size, u32 color) {
 
   }
 }
-    
