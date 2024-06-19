@@ -2,7 +2,7 @@
 #define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
 #define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 
-#include "game.h" 
+#include "game.h"
 
 float player_1_p, player_1_dp, player_2_p, player_2_dp;
 float arena_half_size_x = 85, arena_half_size_y = 45;
@@ -126,7 +126,6 @@ void simulate_game(Input* input, float dt) {
       hot_button = !hot_button;
     }
 
-Александра, [19.06.2024 19:29]
 if (pressed(BUTTON_ENTER)) {
       current_gamemode = GM_GAMEPLAY;
       enemy_is_ai = hot_button ? 0 : 1;
