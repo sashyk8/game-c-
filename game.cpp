@@ -126,7 +126,6 @@ void simulate_game(Input* input, float dt) {
       hot_button = !hot_button;
     }
 
-Александра, [19.06.2024 19:29]
 if (pressed(BUTTON_ENTER)) {
       current_gamemode = GM_GAMEPLAY;
       enemy_is_ai = hot_button ? 0 : 1;
