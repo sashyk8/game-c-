@@ -1,3 +1,8 @@
+/**
+ * @file game_simulation.cpp
+ * @brief Simple Pong-like game simulation.
+ */
+
 #define is_down(b) input->buttons[b].is_down
 #define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
 #define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
@@ -9,6 +14,14 @@ float ball_p_x, ball_p_y, ball_dp_x = 130, ball_dp_y, ball_half_size = 1;
 
 int player_1_score, player_2_score;
 
+/**
+ * @brief Simulates the player's movement.
+ * 
+ * @param p Pointer to the player's position.
+ * @param dp Pointer to the player's velocity.
+ * @param ddp Player's acceleration.
+ * @param dt Delta time for the simulation step.
+ */
 void SimulatePlayer(float *p, float *dp, float ddp, float dt) {
   ddp -= *dp * 10.f;
 
@@ -24,6 +37,20 @@ void SimulatePlayer(float *p, float *dp, float ddp, float dt) {
   }
 }
 
+/**
+ * @brief Checks for axis-aligned bounding box collision.
+ * 
+ * @param p1x X position of the first box.
+ * @param p1y Y position of the first box.
+ * @param hs1x Half size in X direction of the first box.
+ * @param hs1y Half size in Y direction of the first box.
+ * @param p2x X position of the second box.
+ * @param p2y Y position of the second box.
+ * @param hs2x Half size in X direction of the second box.
+ * @param hs2y Half size in Y direction of the second box.
+ * @return true if the boxes collide.
+ * @return false if the boxes do not collide.
+ */
 bool AabbVsAabb(float p1x, float p1y, float hs1x, float hs1y,
                 float p2x, float p2y, float hs2x, float hs2y) {
   return (p1x + hs1x > p2x - hs2x &&
@@ -32,15 +59,24 @@ bool AabbVsAabb(float p1x, float p1y, float hs1x, float hs1y,
           p1y + hs1y < p2y + hs2y);
 }
 
+/**
+ * @brief Enumeration of game modes.
+ */
 enum Gamemode {
-  kMenu,
-  kGameplay,
+  kMenu, /**< Menu mode */
+  kGameplay, /**< Gameplay mode */
 };
 
-Gamemode current_gamemode;
-int hot_button;
-bool enemy_is_ai;
+Gamemode current_gamemode; /**< Current game mode */
+int hot_button; /**< Current selected button in menu */
+bool enemy_is_ai; /**< Is the enemy controlled by AI */
 
+/**
+ * @brief Simulates the game state.
+ * 
+ * @param input Pointer to the input structure.
+ * @param dt Delta time for the simulation step.
+ */
 void SimulateGame(Input* input, float dt) {
   DrawRect(0, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
   DrawArenaBorders(arena_half_size_x, arena_half_size_y, 0xff5500);
