@@ -64,8 +64,24 @@ internal void draw_rect_in_pixels(int x0, int y0, int x1, int y1, u32 color) {
 global_variable float render_scale = 0.01f;
 
 
-internal void
-draw_arena_borders(float arena_x, float arena_y, u32 color) {
+/**
+ * @file render.cpp
+ * @brief Реализация функций для работы с экраном.
+ */
+
+/**
+ * @brief Рисует границы арены на экране с заданным цветом.
+ * 
+ * Функция рисует границы арены, определенные параметрами `arena_x` и `arena_y`, заполняя области за пределами арены указанным цветом.
+ * Координаты арены преобразуются с учетом масштаба и размеров экрана.
+ * 
+ * @param arena_x Ширина арены в логических единицах.
+ * @param arena_y Высота арены в логических единицах.
+ * @param color Цвет, которым будут заполнены области за пределами арены. Тип u32 (обычно это 32-битное целое число, представляющее цвет в формате ARGB или RGBA).
+ * 
+ * @return void Функция не возвращает значения.
+ */
+internal void draw_arena_borders(float arena_x, float arena_y, u32 color) {
   arena_x *= render_state.height * render_scale;
   arena_y *= render_state.height * render_scale;
 
@@ -80,10 +96,23 @@ draw_arena_borders(float arena_x, float arena_y, u32 color) {
   draw_rect_in_pixels(x1, y0, render_state.width, render_state.height, color);
 }
 
-internal void
-draw_rect(float x, float y, float half_size_x, float half_size_y, u32 color) {
+/**
+ * @brief Рисует прямоугольник на экране, используя логические координаты и размеры.
+ * 
+ * Функция рисует прямоугольник с заданным цветом, используя логические координаты и размеры. Эти координаты преобразуются в пиксели
+ * с учетом масштаба и размеров экрана.
+ * 
+ * @param x Координата X центра прямоугольника в логических единицах.
+ * @param y Координата Y центра прямоугольника в логических единицах.
+ * @param half_size_x Половина ширины прямоугольника в логических единицах.
+ * @param half_size_y Половина высоты прямоугольника в логических единицах.
+ * @param color Цвет, которым будет заполнен прямоугольник. Тип u32 (обычно это 32-битное целое число, представляющее цвет в формате ARGB или RGBA).
+ * 
+ * @return void Функция не возвращает значения.
+ */
+internal void draw_rect(float x, float y, float half_size_x, float half_size_y, u32 color) {
 
-  x *= render_state.height*render_scale;
+  x *= render_state.height * render_scale;
   y *= render_state.height * render_scale;
   half_size_x *= render_state.height * render_scale;
   half_size_y *= render_state.height * render_scale;
@@ -91,7 +120,7 @@ draw_rect(float x, float y, float half_size_x, float half_size_y, u32 color) {
   x += render_state.width / 2.f;
   y += render_state.height / 2.f;
 
-  // Change to pixels
+  // Преобразование в пиксели
   int x0 = x - half_size_x;
   int x1 = x + half_size_x;
   int y0 = y - half_size_y;
@@ -99,6 +128,7 @@ draw_rect(float x, float y, float half_size_x, float half_size_y, u32 color) {
 
   draw_rect_in_pixels(x0, y0, x1, y1, color);
 }
+
 
 const char* letters[][7] = {
     " 00",
