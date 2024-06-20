@@ -1,0 +1,645 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.11.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Проект Pong AI: Файл game.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Проект Pong AI<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Документация</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Макросы</a> &#124;
+<a href="#enum-members">Перечисления</a> &#124;
+<a href="#func-members">Функции</a> &#124;
+<a href="#var-members">Переменные</a>  </div>
+  <div class="headertitle"><div class="title">Файл game.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Макросы</h2></td></tr>
+<tr class="memitem:a2b321453c207699633b9b88eff579526" id="r_a2b321453c207699633b9b88eff579526"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b321453c207699633b9b88eff579526">is_down</a>(b)&#160;&#160;&#160;input-&gt;buttons[b].is_down</td></tr>
+<tr class="separator:a2b321453c207699633b9b88eff579526"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19b0cdf64461086b0ae5f8d6caf8f372" id="r_a19b0cdf64461086b0ae5f8d6caf8f372"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a19b0cdf64461086b0ae5f8d6caf8f372">pressed</a>(b)&#160;&#160;&#160;(input-&gt;buttons[b].<a class="el" href="#a2b321453c207699633b9b88eff579526">is_down</a> &amp;&amp; input-&gt;buttons[b].changed)</td></tr>
+<tr class="separator:a19b0cdf64461086b0ae5f8d6caf8f372"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dc239348c01d73bb34493d5fb53b86e" id="r_a1dc239348c01d73bb34493d5fb53b86e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1dc239348c01d73bb34493d5fb53b86e">released</a>(b)&#160;&#160;&#160;(!input-&gt;buttons[b].<a class="el" href="#a2b321453c207699633b9b88eff579526">is_down</a> &amp;&amp; input-&gt;buttons[b].changed)</td></tr>
+<tr class="separator:a1dc239348c01d73bb34493d5fb53b86e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Перечисления</h2></td></tr>
+<tr class="memitem:a1c76e2d1f523d33155289c2ea84dd20e" id="r_a1c76e2d1f523d33155289c2ea84dd20e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c76e2d1f523d33155289c2ea84dd20e">Gamemode</a> { <a class="el" href="#a1c76e2d1f523d33155289c2ea84dd20ead95994ff47993097e26b4b212426b7e3">kMenu</a>
+, <a class="el" href="#a1c76e2d1f523d33155289c2ea84dd20ea64484d09bd5795198c3e2ac9172cc764">kGameplay</a>
+ }</td></tr>
+<tr class="memdesc:a1c76e2d1f523d33155289c2ea84dd20e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Перечисление режимов игры.  <a href="#a1c76e2d1f523d33155289c2ea84dd20e">Подробнее...</a><br /></td></tr>
+<tr class="separator:a1c76e2d1f523d33155289c2ea84dd20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a00bb99c298a33a07af3a6b1ad8c5691e" id="r_a00bb99c298a33a07af3a6b1ad8c5691e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a00bb99c298a33a07af3a6b1ad8c5691e">SimulatePlayer</a> (float *p, float *dp, float ddp, float dt)</td></tr>
+<tr class="memdesc:a00bb99c298a33a07af3a6b1ad8c5691e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Симулирует движение игрока.  <br /></td></tr>
+<tr class="separator:a00bb99c298a33a07af3a6b1ad8c5691e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6e0df8a894a7782991397c1a7a7e785" id="r_ab6e0df8a894a7782991397c1a7a7e785"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6e0df8a894a7782991397c1a7a7e785">AabbVsAabb</a> (float p1x, float p1y, float hs1x, float hs1y, float p2x, float p2y, float hs2x, float hs2y)</td></tr>
+<tr class="memdesc:ab6e0df8a894a7782991397c1a7a7e785"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет столкновение осей параллелепипедов.  <br /></td></tr>
+<tr class="separator:ab6e0df8a894a7782991397c1a7a7e785"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a736b923f7e60bc19f914fd84ee069e37" id="r_a736b923f7e60bc19f914fd84ee069e37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a736b923f7e60bc19f914fd84ee069e37">SimulateGame</a> (Input *input, float dt)</td></tr>
+<tr class="memdesc:a736b923f7e60bc19f914fd84ee069e37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Симулирует состояние игры.  <br /></td></tr>
+<tr class="separator:a736b923f7e60bc19f914fd84ee069e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Переменные</h2></td></tr>
+<tr class="memitem:a6c7bb373a72ad8e7f79280f4ed92a885" id="r_a6c7bb373a72ad8e7f79280f4ed92a885"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c7bb373a72ad8e7f79280f4ed92a885">player_1_p</a></td></tr>
+<tr class="separator:a6c7bb373a72ad8e7f79280f4ed92a885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99428f9a741a33de1841e3c534ab3116" id="r_a99428f9a741a33de1841e3c534ab3116"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99428f9a741a33de1841e3c534ab3116">player_1_dp</a></td></tr>
+<tr class="separator:a99428f9a741a33de1841e3c534ab3116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8db81b7d59ed895df68cc4b3daab99a1" id="r_a8db81b7d59ed895df68cc4b3daab99a1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8db81b7d59ed895df68cc4b3daab99a1">player_2_p</a></td></tr>
+<tr class="separator:a8db81b7d59ed895df68cc4b3daab99a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa34a42a9c82f347bee9cf670ace74d52" id="r_aa34a42a9c82f347bee9cf670ace74d52"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa34a42a9c82f347bee9cf670ace74d52">player_2_dp</a></td></tr>
+<tr class="separator:aa34a42a9c82f347bee9cf670ace74d52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ef331c0febdc295a8387b31afc34530" id="r_a9ef331c0febdc295a8387b31afc34530"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ef331c0febdc295a8387b31afc34530">arena_half_size_x</a> = 85</td></tr>
+<tr class="separator:a9ef331c0febdc295a8387b31afc34530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab114113b66edd7e7ec67d285c53fd876" id="r_ab114113b66edd7e7ec67d285c53fd876"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab114113b66edd7e7ec67d285c53fd876">arena_half_size_y</a> = 45</td></tr>
+<tr class="separator:ab114113b66edd7e7ec67d285c53fd876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0db8a1b5d3c517427e2cc38902d0ce96" id="r_a0db8a1b5d3c517427e2cc38902d0ce96"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0db8a1b5d3c517427e2cc38902d0ce96">player_half_size_x</a> = 2.5</td></tr>
+<tr class="separator:a0db8a1b5d3c517427e2cc38902d0ce96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16a30cf0acbb3a286a9b38377de9ff8e" id="r_a16a30cf0acbb3a286a9b38377de9ff8e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a16a30cf0acbb3a286a9b38377de9ff8e">player_half_size_y</a> = 12</td></tr>
+<tr class="separator:a16a30cf0acbb3a286a9b38377de9ff8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af864bb0ebaa318357e9a744e909643cd" id="r_af864bb0ebaa318357e9a744e909643cd"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af864bb0ebaa318357e9a744e909643cd">ball_p_x</a></td></tr>
+<tr class="separator:af864bb0ebaa318357e9a744e909643cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab11d631e81c834584d3037e6fd840b9c" id="r_ab11d631e81c834584d3037e6fd840b9c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab11d631e81c834584d3037e6fd840b9c">ball_p_y</a></td></tr>
+<tr class="separator:ab11d631e81c834584d3037e6fd840b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad70a655fa490351814a8462c13f35285" id="r_ad70a655fa490351814a8462c13f35285"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad70a655fa490351814a8462c13f35285">ball_dp_x</a> = 130</td></tr>
+<tr class="separator:ad70a655fa490351814a8462c13f35285"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae293ad05ead381a55c7b6967851bea67" id="r_ae293ad05ead381a55c7b6967851bea67"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae293ad05ead381a55c7b6967851bea67">ball_dp_y</a></td></tr>
+<tr class="separator:ae293ad05ead381a55c7b6967851bea67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48cfa0e0c229840ca8324ea4309593be" id="r_a48cfa0e0c229840ca8324ea4309593be"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48cfa0e0c229840ca8324ea4309593be">ball_half_size</a> = 1</td></tr>
+<tr class="separator:a48cfa0e0c229840ca8324ea4309593be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ecd1f474ccba2e0c7f04558685442f6" id="r_a7ecd1f474ccba2e0c7f04558685442f6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ecd1f474ccba2e0c7f04558685442f6">player_1_score</a></td></tr>
+<tr class="separator:a7ecd1f474ccba2e0c7f04558685442f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a304525176903e154a219828b14e7c29f" id="r_a304525176903e154a219828b14e7c29f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a304525176903e154a219828b14e7c29f">player_2_score</a></td></tr>
+<tr class="separator:a304525176903e154a219828b14e7c29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a796800fac01618af5ae379734b49de49" id="r_a796800fac01618af5ae379734b49de49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a1c76e2d1f523d33155289c2ea84dd20e">Gamemode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a796800fac01618af5ae379734b49de49">current_gamemode</a></td></tr>
+<tr class="separator:a796800fac01618af5ae379734b49de49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef62a2f0d11dc769c9736fdb2ba893fb" id="r_aef62a2f0d11dc769c9736fdb2ba893fb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef62a2f0d11dc769c9736fdb2ba893fb">hot_button</a></td></tr>
+<tr class="separator:aef62a2f0d11dc769c9736fdb2ba893fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f29a8cadf23d5f5c77d756c87068014" id="r_a3f29a8cadf23d5f5c77d756c87068014"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f29a8cadf23d5f5c77d756c87068014">enemy_is_ai</a></td></tr>
+<tr class="separator:a3f29a8cadf23d5f5c77d756c87068014"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Макросы</h2>
+<a id="a2b321453c207699633b9b88eff579526" name="a2b321453c207699633b9b88eff579526"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b321453c207699633b9b88eff579526">&#9670;&#160;</a></span>is_down</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define is_down</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>b</em></span></td><td>)</td>
+          <td>&#160;&#160;&#160;input-&gt;buttons[b].is_down</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19b0cdf64461086b0ae5f8d6caf8f372" name="a19b0cdf64461086b0ae5f8d6caf8f372"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19b0cdf64461086b0ae5f8d6caf8f372">&#9670;&#160;</a></span>pressed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define pressed</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>b</em></span></td><td>)</td>
+          <td>&#160;&#160;&#160;(input-&gt;buttons[b].<a class="el" href="#a2b321453c207699633b9b88eff579526">is_down</a> &amp;&amp; input-&gt;buttons[b].changed)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1dc239348c01d73bb34493d5fb53b86e" name="a1dc239348c01d73bb34493d5fb53b86e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dc239348c01d73bb34493d5fb53b86e">&#9670;&#160;</a></span>released</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define released</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>b</em></span></td><td>)</td>
+          <td>&#160;&#160;&#160;(!input-&gt;buttons[b].<a class="el" href="#a2b321453c207699633b9b88eff579526">is_down</a> &amp;&amp; input-&gt;buttons[b].changed)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Перечисления</h2>
+<a id="a1c76e2d1f523d33155289c2ea84dd20e" name="a1c76e2d1f523d33155289c2ea84dd20e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c76e2d1f523d33155289c2ea84dd20e">&#9670;&#160;</a></span>Gamemode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a1c76e2d1f523d33155289c2ea84dd20e">Gamemode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Перечисление режимов игры. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="a1c76e2d1f523d33155289c2ea84dd20ead95994ff47993097e26b4b212426b7e3" name="a1c76e2d1f523d33155289c2ea84dd20ead95994ff47993097e26b4b212426b7e3"></a>kMenu&#160;</td><td class="fielddoc"><p>Режим меню </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1c76e2d1f523d33155289c2ea84dd20ea64484d09bd5795198c3e2ac9172cc764" name="a1c76e2d1f523d33155289c2ea84dd20ea64484d09bd5795198c3e2ac9172cc764"></a>kGameplay&#160;</td><td class="fielddoc"><p>Режим игры </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Функции</h2>
+<a id="ab6e0df8a894a7782991397c1a7a7e785" name="ab6e0df8a894a7782991397c1a7a7e785"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6e0df8a894a7782991397c1a7a7e785">&#9670;&#160;</a></span>AabbVsAabb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool AabbVsAabb </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>p1x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>p1y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>hs1x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>hs1y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>p2x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>p2y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>hs2x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>hs2y</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверяет столкновение осей параллелепипедов. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p1x</td><td>X позиция первого параллелепипеда. </td></tr>
+    <tr><td class="paramname">p1y</td><td>Y позиция первого параллелепипеда. </td></tr>
+    <tr><td class="paramname">hs1x</td><td>Половина размера по X первого параллелепипеда. </td></tr>
+    <tr><td class="paramname">hs1y</td><td>Половина размера по Y первого параллелепипеда. </td></tr>
+    <tr><td class="paramname">p2x</td><td>X позиция второго параллелепипеда. </td></tr>
+    <tr><td class="paramname">p2y</td><td>Y позиция второго параллелепипеда. </td></tr>
+    <tr><td class="paramname">hs2x</td><td>Половина размера по X второго параллелепипеда. </td></tr>
+    <tr><td class="paramname">hs2y</td><td>Половина размера по Y второго параллелепипеда. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>true если параллелепипеды сталкиваются. </dd>
+<dd>
+false если параллелепипеды не сталкиваются. </dd></dl>
+
+</div>
+</div>
+<a id="a736b923f7e60bc19f914fd84ee069e37" name="a736b923f7e60bc19f914fd84ee069e37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a736b923f7e60bc19f914fd84ee069e37">&#9670;&#160;</a></span>SimulateGame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimulateGame </td>
+          <td>(</td>
+          <td class="paramtype">Input *</td>          <td class="paramname"><span class="paramname"><em>input</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>dt</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Симулирует состояние игры. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>Указатель на структуру ввода. </td></tr>
+    <tr><td class="paramname">dt</td><td>Время, прошедшее с последнего шага симуляции. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a00bb99c298a33a07af3a6b1ad8c5691e" name="a00bb99c298a33a07af3a6b1ad8c5691e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00bb99c298a33a07af3a6b1ad8c5691e">&#9670;&#160;</a></span>SimulatePlayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimulatePlayer </td>
+          <td>(</td>
+          <td class="paramtype">float *</td>          <td class="paramname"><span class="paramname"><em>p</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *</td>          <td class="paramname"><span class="paramname"><em>dp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>ddp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>dt</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Симулирует движение игрока. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Указатель на позицию игрока. </td></tr>
+    <tr><td class="paramname">dp</td><td>Указатель на скорость игрока. </td></tr>
+    <tr><td class="paramname">ddp</td><td>Ускорение игрока. </td></tr>
+    <tr><td class="paramname">dt</td><td>Время, прошедшее с последнего шага симуляции. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Переменные</h2>
+<a id="a9ef331c0febdc295a8387b31afc34530" name="a9ef331c0febdc295a8387b31afc34530"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ef331c0febdc295a8387b31afc34530">&#9670;&#160;</a></span>arena_half_size_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float arena_half_size_x = 85</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab114113b66edd7e7ec67d285c53fd876" name="ab114113b66edd7e7ec67d285c53fd876"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab114113b66edd7e7ec67d285c53fd876">&#9670;&#160;</a></span>arena_half_size_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float arena_half_size_y = 45</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad70a655fa490351814a8462c13f35285" name="ad70a655fa490351814a8462c13f35285"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad70a655fa490351814a8462c13f35285">&#9670;&#160;</a></span>ball_dp_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ball_dp_x = 130</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae293ad05ead381a55c7b6967851bea67" name="ae293ad05ead381a55c7b6967851bea67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae293ad05ead381a55c7b6967851bea67">&#9670;&#160;</a></span>ball_dp_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ball_dp_y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48cfa0e0c229840ca8324ea4309593be" name="a48cfa0e0c229840ca8324ea4309593be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48cfa0e0c229840ca8324ea4309593be">&#9670;&#160;</a></span>ball_half_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ball_half_size = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af864bb0ebaa318357e9a744e909643cd" name="af864bb0ebaa318357e9a744e909643cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af864bb0ebaa318357e9a744e909643cd">&#9670;&#160;</a></span>ball_p_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ball_p_x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab11d631e81c834584d3037e6fd840b9c" name="ab11d631e81c834584d3037e6fd840b9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab11d631e81c834584d3037e6fd840b9c">&#9670;&#160;</a></span>ball_p_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ball_p_y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a796800fac01618af5ae379734b49de49" name="a796800fac01618af5ae379734b49de49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a796800fac01618af5ae379734b49de49">&#9670;&#160;</a></span>current_gamemode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1c76e2d1f523d33155289c2ea84dd20e">Gamemode</a> current_gamemode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Текущий режим игры </p>
+
+</div>
+</div>
+<a id="a3f29a8cadf23d5f5c77d756c87068014" name="a3f29a8cadf23d5f5c77d756c87068014"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f29a8cadf23d5f5c77d756c87068014">&#9670;&#160;</a></span>enemy_is_ai</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool enemy_is_ai</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Управляется ли противник ИИ </p>
+
+</div>
+</div>
+<a id="aef62a2f0d11dc769c9736fdb2ba893fb" name="aef62a2f0d11dc769c9736fdb2ba893fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef62a2f0d11dc769c9736fdb2ba893fb">&#9670;&#160;</a></span>hot_button</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int hot_button</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Текущая выбранная кнопка в меню </p>
+
+</div>
+</div>
+<a id="a99428f9a741a33de1841e3c534ab3116" name="a99428f9a741a33de1841e3c534ab3116"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99428f9a741a33de1841e3c534ab3116">&#9670;&#160;</a></span>player_1_dp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float player_1_dp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6c7bb373a72ad8e7f79280f4ed92a885" name="a6c7bb373a72ad8e7f79280f4ed92a885"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c7bb373a72ad8e7f79280f4ed92a885">&#9670;&#160;</a></span>player_1_p</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float player_1_p</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7ecd1f474ccba2e0c7f04558685442f6" name="a7ecd1f474ccba2e0c7f04558685442f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ecd1f474ccba2e0c7f04558685442f6">&#9670;&#160;</a></span>player_1_score</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int player_1_score</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa34a42a9c82f347bee9cf670ace74d52" name="aa34a42a9c82f347bee9cf670ace74d52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa34a42a9c82f347bee9cf670ace74d52">&#9670;&#160;</a></span>player_2_dp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float player_2_dp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8db81b7d59ed895df68cc4b3daab99a1" name="a8db81b7d59ed895df68cc4b3daab99a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8db81b7d59ed895df68cc4b3daab99a1">&#9670;&#160;</a></span>player_2_p</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float player_2_p</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a304525176903e154a219828b14e7c29f" name="a304525176903e154a219828b14e7c29f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a304525176903e154a219828b14e7c29f">&#9670;&#160;</a></span>player_2_score</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int player_2_score</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0db8a1b5d3c517427e2cc38902d0ce96" name="a0db8a1b5d3c517427e2cc38902d0ce96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0db8a1b5d3c517427e2cc38902d0ce96">&#9670;&#160;</a></span>player_half_size_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float player_half_size_x = 2.5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a16a30cf0acbb3a286a9b38377de9ff8e" name="a16a30cf0acbb3a286a9b38377de9ff8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16a30cf0acbb3a286a9b38377de9ff8e">&#9670;&#160;</a></span>player_half_size_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float player_half_size_y = 12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по Проект Pong AI. Последние изменения: Чт 20 Июн 2024 15:18:40. Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>
