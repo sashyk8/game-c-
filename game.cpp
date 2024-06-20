@@ -1,5 +1,5 @@
 /**
- * @file game_simulation.cpp
+ * @file game.cpp
  * @brief Pong AI + Multiplayer.
  */
 
