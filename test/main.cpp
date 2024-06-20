@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 
-// Глобальные переменные, используемые в simulate_player
 const float player_half_size_y = 1.0f;
 const float arena_half_size_y = 10.0f;
 
