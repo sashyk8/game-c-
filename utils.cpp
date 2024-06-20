@@ -1,5 +1,5 @@
 /**
- * @file types_and_macros.h
+ * @file utils.cpp
  * @brief Определения типов и макросов.
  */
 
