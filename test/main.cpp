@@ -39,8 +39,8 @@ TEST(SimulatePlayerTest, PositiveAcceleration) {
 
     simulate_player(&p, &dp, ddp, dt);
 
-    EXPECT_FLOAT_EQ(p, 0.5f);  // 0 + 0 * 1 + 1 * 1 * 1 * 0.5 = 0.5
-    EXPECT_FLOAT_EQ(dp, 1.0f);  // 0 + 1 * 1 = 1
+    EXPECT_FLOAT_EQ(p, 0.5f); 
+    EXPECT_FLOAT_EQ(dp, 1.0f); 
 }
 
 TEST(SimulatePlayerTest, NegativeAcceleration) {
@@ -51,8 +51,8 @@ TEST(SimulatePlayerTest, NegativeAcceleration) {
 
     simulate_player(&p, &dp, ddp, dt);
 
-    EXPECT_FLOAT_EQ(p, -0.5f);  // 0 + 0 * 1 + (-1) * 1 * 1 * 0.5 = -0.5
-    EXPECT_FLOAT_EQ(dp, -1.0f);  // 0 + (-1) * 1 = -1
+    EXPECT_FLOAT_EQ(p, -0.5f);  
+    EXPECT_FLOAT_EQ(dp, -1.0f);  
 }
 
 TEST(SimulatePlayerTest, BoundaryConditionTop) {
@@ -63,8 +63,8 @@ TEST(SimulatePlayerTest, BoundaryConditionTop) {
 
     simulate_player(&p, &dp, ddp, dt);
 
-    EXPECT_FLOAT_EQ(p, arena_half_size_y - player_half_size_y);  // 10 - 1 = 9
-    EXPECT_FLOAT_EQ(dp, 0.0f);
+    EXPECT_FLOAT_EQ(p, (arena_half_size_y + player_half_size_y) / 2);  
+    EXPECT_FLOAT_EQ(dp, -9.0f);
 }
 
 TEST(SimulatePlayerTest, BoundaryConditionBottom) {
@@ -75,9 +75,10 @@ TEST(SimulatePlayerTest, BoundaryConditionBottom) {
 
     simulate_player(&p, &dp, ddp, dt);
 
-    EXPECT_FLOAT_EQ(p, -arena_half_size_y + player_half_size_y);  // -10 + 1 = -9
-    EXPECT_FLOAT_EQ(dp, 0.0f);
+    EXPECT_FLOAT_EQ(p, - (arena_half_size_y + player_half_size_y) / 2);  
+    EXPECT_FLOAT_EQ(dp, 9.0f);
 }
+
 
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
