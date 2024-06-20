@@ -1,9 +1,9 @@
 # Doxyfile 1.11
 
 # Project related configuration options
-PROJECT_NAME           = "Проект Платформа"
+PROJECT_NAME           = "Platform"
 PROJECT_NUMBER         = "1.0"
-PROJECT_BRIEF          = "Документация для проекта Платформа"
+PROJECT_BRIEF          = "Документация"
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       = docs
 CREATE_SUBDIRS         = NO
