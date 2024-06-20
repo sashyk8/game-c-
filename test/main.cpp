@@ -102,6 +102,17 @@ struct Render_State {
 
 global_variable Render_State render_state;
 
+TEST(RendererTest, ClearScreen) {
+    constexpr unsigned int color = 123;
+    clear_screen(color);
+    const auto* pixel = static_cast<unsigned int*>(render_state.memory);
+    for (int y = 0; y < render_state.height; y++) {
+        for (int x = 0; x < render_state.width; x++) {
+            EXPECT_EQ(*pixel++, color);
+        }
+    }
+}
+
 LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     LRESULT result = 0;
 
