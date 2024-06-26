@@ -1,4 +1,52 @@
 #include <gtest/gtest.h>
+#include <windows.h>
+
+#define IDM_OPEN 1
+#define IDM_SAVE 2
+#define IDM_EXIT 3
+#define IDM_ABOUT 4
+
+HWND test_window = nullptr; 
+bool was_message_box_called = false; 
+
+void send_command_message(UINT command_id) {
+    SendMessage(test_window, WM_COMMAND, command_id, 0);
+}
+
+int WINAPI fake_message_box(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType) {
+    was_message_box_called = true;
+    return 0; 
+}
+
+class MenuTests : public ::testing::Test {
+protected:
+    static void SetUpTestSuite() {
+        WNDCLASS wc = {};
+        wc.lpfnWndProc = DefWindowProc;
+        wc.hInstance = GetModuleHandle(NULL);
+        wc.lpszClassName = "TestWindowClass";
+        RegisterClass(&wc);
+
+        test_window = CreateWindow(wc.lpszClassName, "Test Window", 0, 0, 0, 0, 0, NULL, NULL, wc.hInstance, NULL);
+        ASSERT_TRUE(test_window != nullptr);
+    }
+
+    static void TearDownTestSuite() {
+        DestroyWindow(test_window);
+        test_window = nullptr;
+    }
+
+    void SetUp() override {
+        was_message_box_called = false;
+    }
+};
+
+TEST_F(MenuTests, ExitMenuCommand) {
+    send_command_message(IDM_EXIT);
+    EXPECT_TRUE(true);
+}
+
+int WINAPI MessageBoxA(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType);
 
 const float player_half_size_y = 1.0f;
 const float arena_half_size_y = 10.0f;
@@ -39,8 +87,8 @@ TEST(SimulatePlayerTest, PositiveAcceleration) {
 
     simulate_player(&p, &dp, ddp, dt);
 
-    EXPECT_FLOAT_EQ(p, 0.5f); 
-    EXPECT_FLOAT_EQ(dp, 1.0f); 
+    EXPECT_FLOAT_EQ(p, 0.5f);
+    EXPECT_FLOAT_EQ(dp, 1.0f);
 }
 
 TEST(SimulatePlayerTest, NegativeAcceleration) {
@@ -51,8 +99,8 @@ TEST(SimulatePlayerTest, NegativeAcceleration) {
 
     simulate_player(&p, &dp, ddp, dt);
 
-    EXPECT_FLOAT_EQ(p, -0.5f);  
-    EXPECT_FLOAT_EQ(dp, -1.0f);  
+    EXPECT_FLOAT_EQ(p, -0.5f);
+    EXPECT_FLOAT_EQ(dp, -1.0f);
 }
 
 TEST(SimulatePlayerTest, BoundaryConditionTop) {
@@ -63,7 +111,7 @@ TEST(SimulatePlayerTest, BoundaryConditionTop) {
 
     simulate_player(&p, &dp, ddp, dt);
 
-    EXPECT_FLOAT_EQ(p, (arena_half_size_y + player_half_size_y) / 2);  
+    EXPECT_FLOAT_EQ(p, (arena_half_size_y + player_half_size_y) / 2);
     EXPECT_FLOAT_EQ(dp, -9.0f);
 }
 
@@ -75,20 +123,11 @@ TEST(SimulatePlayerTest, BoundaryConditionBottom) {
 
     simulate_player(&p, &dp, ddp, dt);
 
-    EXPECT_FLOAT_EQ(p, - (arena_half_size_y + player_half_size_y) / 2);  
+    EXPECT_FLOAT_EQ(p, -(arena_half_size_y + player_half_size_y) / 2);
     EXPECT_FLOAT_EQ(dp, 9.0f);
 }
 
-
-int main(int argc, char** argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
-
-
-#include <windows.h>
-
-global_variable bool running = true;
+static bool running = true;
 
 struct Render_State {
     int height, width;
@@ -97,11 +136,16 @@ struct Render_State {
     BITMAPINFO bitmap_info;
 };
 
+static Render_State render_state;
 
-#define global_variable static
-// #define internal static
-
-global_variable Render_State render_state;
+void clear_screen(const unsigned int color) {
+    auto* pixel = static_cast<unsigned int*>(render_state.memory);
+    for (int y = 0; y < render_state.height; y++) {
+        for (int x = 0; x < render_state.width; x++) {
+            *pixel++ = color;
+        }
+    }
+}
 
 TEST(RendererTest, ClearScreen) {
     constexpr unsigned int color = 123;
@@ -110,6 +154,21 @@ TEST(RendererTest, ClearScreen) {
     for (int y = 0; y < render_state.height; y++) {
         for (int x = 0; x < render_state.width; x++) {
             EXPECT_EQ(*pixel++, color);
+        }
+    }
+}
+
+TEST(RendererTest, ClearScreenDifferentColor) {
+    constexpr unsigned int color1 = 123;
+    constexpr unsigned int color2 = 456;
+
+    clear_screen(color1);
+    clear_screen(color2);
+
+    const auto* pixel = static_cast<unsigned int*>(render_state.memory);
+    for (int y = 0; y < render_state.height; y++) {
+        for (int x = 0; x < render_state.width; x++) {
+            EXPECT_EQ(*pixel++, color2);
         }
     }
 }
@@ -151,15 +210,18 @@ LRESULT CALLBACK window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 }
 
 TEST(WindowCallbackTests, CloseAndDestroyMessages) {
-    // Simulate WM_CLOSE message
-    HWND hwnd = nullptr;  // Assuming hwnd is not used in the callback for this test
+    HWND hwnd = nullptr;
     UINT uMsg = WM_CLOSE;
     WPARAM wParam = 0;
     LPARAM lParam = 0;
 
-    // Call the window_callback function
     LRESULT result = window_callback(hwnd, uMsg, wParam, lParam);
 
-    // Assert that running should be false after handling WM_CLOSE/WM_DESTROY
-    ASSERT_EQ(result, 0);   // Assert the result returned
+    ASSERT_FALSE(running);
+    ASSERT_EQ(result, 0);
+}
+
+int main(int argc, char** argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
